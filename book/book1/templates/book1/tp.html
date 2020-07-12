@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<!  ----------------------- Books.html-----------------------------------------------------------
+        Discription of page: User can view books of different genres on this webpage only
+                              after succeful login or sign up. User can select the books and
+                              books will be added in the cart. After clicking on "Go to Cart"
+                              button user will be redirected to cart.html webpage where he
+                              will get his invoice.
+
+         version:             Date:                Author:              Purpose:
+         Python 3.6          11/07/2020         Purva Badgujar         To show books
+         django 3.0.7                                                  available on
+         Html 5                                                        website.
+
+        Naming Convention:
+        l_(variable) : Local variable
+        s_(variable) : Shared variables
+
+------------------------------------------------------------------------------------------------- >
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style>
+      /* --------------------------- Style for Header ------------------------ */
+      html, body {
+         margin: 0;
+         padding: 0;
+         font-family : Roboto,Arial,sans-serif;
+         }
+
+         #login{
+         background-color: black;
+         margin-top: -70px;
+         border: none;
+         color: white;
+         padding: 12px 16px;
+         margin-right: -20px;
+         font-size: 22px;
+         cursor: pointer;
+         }
+
+         .container1 {
+         position: relative;
+         width: 30%;
+         margin-left:370px;
+         margin-top: 55px;
+         padding-left:10px;
+         padding-right:10px;
+         }
+
+         .container2 {
+         position: relative;
+         margin-left:615px;
+         padding-left:10px;
+         padding-right:10px;
+         margin-top: 55px;
+         bottom:210px;
+         width: 30%;
+         }
+
+         .container4 {
+         position: relative;
+         margin-left:1105px;
+         margin-top: 55px;
+         padding-left:10px;
+         padding-right:10px;
+         bottom:630px;
+         width: 30%;
+         }
+
+         .container3 {
+         position: relative;
+         margin-left:860px;
+         margin-top: 55px;
+         padding-left:10px;
+         padding-right:10px;
+         bottom:420px;
+         width: 30%;
+         }
+
+         .image {
+         opacity: 1;
+         width: 50px;
+         height: 150px;
+         transition: .5s ease;
+         backface-visibility: hidden;
+         border-radius: 50%;
+         }
+
+         .middle {
+         transition: .5s ease;
+         opacity: 0;
+         position: absolute;
+         top: 50%;
+         left: 25%;
+         transform: translate(-50%, -50%);
+         -ms-transform: translate(-50%, -50%);
+         text-align: center;
+         }
+
+         .container1:hover .image {
+         opacity: 0.2;
+         }
+
+         .container1:hover .middle {
+         opacity: 1;
+         }
+         .container2:hover .image {
+
+         opacity: 0.2;
+         }
+
+         .container2:hover .middle {
+         opacity: 1;
+         }
+
+         .container3:hover .image {
+         opacity: 0.2;
+         }
+
+         .container3:hover .middle {
+         opacity: 1;
+         }
+
+         .container4:hover .image {
+         opacity: 0.2;
+         }
+
+         .container4:hover .middle {
+         opacity: 1;
+         }
+
+         .text {
+         color: black;
+         font-size: 18px;
+         padding: 56px 32px;
+         font: italic bold 12px/30px Georgia, serif;
+         }
+
+         #t1 {
+         margin-right: 300px;
+         font-size: 25px;
+         margin-top: 150px;
+         }
+
+         .container {
+         width:100%;
+         height:190px;
+         padding-top:20px;
+         padding-left:15px;
+         padding-right:15px;
+         background-image: linear-gradient(to bottom right,#964B00,  #eaadbd);
+         shadow: 0 0 10px .1px
+         }
+
+         form.example input[type=text] {
+         padding: 10px;
+         font-size: 17px;
+         border: 1px solid grey;
+         margin-top: -20px;
+         margin-bottom: 0px;
+         margin-left: 500px;
+         width: 100%;
+         background-position: -23px 0;
+         }
+
+         form.example button {
+         float: left;
+         width: 20%;
+         padding: 10px;
+         background: #2196F3;
+         color: white;
+         font-size: 17px;
+         height: 100%;
+         border: 1px solid grey;
+         border-left: none;
+         cursor: pointer;
+         margin-left: 825px;
+         margin-top: -42px;
+         }
+
+         form.example button:hover {
+         background: #0b7dda;
+         }
+
+         form.example::after {
+         content: "";
+         clear: both;
+         display: table;
+         }
+
+         #f1 {
+         float: top;
+         position: absolute;
+         margin-left:90px;
+         font-size: 45px;
+         margin-top: -260px;
+    font-family : Roboto,Arial,sans-serif;
+
+         }
+
+         ul {
+         list-style-type: none;
+         margin-top: -65px;
+         padding-left: 300px;
+         overflow: hidden;
+         border: 1px solid #e7e7e7;
+         background-color: black;
+         box-shadow: 0 0 10px .1px;
+         }
+
+         li {
+         float: left;
+         }
+
+         li a {
+         display: block;
+         color: #666;
+         text-align: center;
+         padding: 14px 30px;
+         text-decoration: none;
+         font-size: 25px;
+         color:white;
+         }
+
+         li a:hover:not(.active) {
+         background-color: #333333;
+         }
+
+         li a.active {
+         color: white;
+         background-color: #8F3714;
+         }
+
+         .example{
+         margin:auto;
+         padding-top:20px;
+         padding-right:200px;
+         align:center;
+         margin-right: 550px;
+         max-width:300px
+         }
+         #search{
+         background-color: black;
+         }
+         .card {
+         float:left;
+         box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+         transition: 0.3s;
+         width: 20%;
+         margin-left: 10px;
+         height:600px;
+         border-radius: 10px;
+         margin-right: 20px;
+         border: solid black 1.5px;
+         background-color:#ffeece;
+         }
+         .card:hover {
+         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+         }
+         .contain {
+         padding: 2px 16px;
+         height:47%;
+         }
+         .contain1 {
+         padding: 2px 16px;
+         height:50%;
+         }
+         .line{
+         border-top: 1px dashed black;
+         }
+         .Recommended{
+         float:left;
+         padding-left:2px;
+         }
+         .bookcard {
+         float:left;
+         box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+         transition: 0.3s;
+         width: 200px;
+         height:450px;
+         margin-left:10px;
+         margin-right:10px;
+         border-radius: 2px;
+         padding:10px;
+         }
+         .bookcard:hover {
+         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.9);
+         }
+         .w3-button{border:none;
+         display:inline-block;
+         padding:28px 16px;
+         vertical-align:middle;
+         overflow:hidden;
+         text-decoration:none;
+         color:inherit;
+         background-color:black;
+         text-align:center;
+         cursor:pointer;
+         color:white;
+         white-space:nowrap;
+         -webkit-touch-callout:none;
+         -webkit-user-select:none;
+         -khtml-user-select:none;
+         -moz-user-select:none;
+         -ms-user-select:none;
+         user-select:none}
+         .w3-black
+         {color:#fff
+         background-color:#000
+         }
+         .w3-display-left
+         {float:left;
+         position: element(.bookcard);
+         transform: translateX(-10%);
+         transform: translateY(250%);
+         }
+         .w3-display-right
+         {float:right
+         position: element(.bookcard);
+         transform: translateX(10%);
+         transform: translateY(180%);}
+         .w3-content:
+         {margin-left:50px;;
+         margin-right:auto;
+         max-width:980px}
+         .dropdown {
+         float: left;
+         overflow: hidden;
+             font-family : Roboto,Arial,sans-serif;
+
+         }
+         .dropdown .dropbtn {
+         font-size: 16px;
+         border: none;
+         outline: none;
+         color: white;
+         padding: 14px 16px;
+         background-color: inherit;
+         font-family : Roboto,Arial,sans-serif;
+
+         margin: 0;
+         }
+         .dropdown-content {
+         display: none;
+         position: absolute;
+         background-color: black;
+         color:white;
+         width: 30%;
+         left: 80;
+         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+         z-index: 1;
+         }
+         .dropdown:hover .dropdown-content {
+         display: block;
+         }
+         .column {
+         float: left;
+         width: 45%;
+         padding: 10px;
+         height: 250px;
+         color:white;
+         }
+         .column a {
+         float: none;
+         color: black;
+         text-decoration: none;
+         display: block;
+         text-align: left;
+         }
+         .column a:hover {
+         background-color: #ddd;
+         }
+         /* Clear floats after the columns */
+         .row:after {
+         content: "";
+         display: table;
+         clear: both;
+         }
+         .dropdown-content a {
+         color:white;
+         padding: 12px 16px;
+         text-decoration: none;
+         display: block;
+         text-align: left;
+         }
+
+         .dropdown-content a:hover {background-color: #f1f1f1;}
+         .dropdown:hover .dropdown-content {
+         display: block;
+         }
+
+         .img{
+         width:60%;
+         height:63%;
+         display:block;
+         margin-left:auto;
+         margin-right: auto;
+         }
+
+         .footer {
+         position: relative;
+         left: 0;
+         background-color:#ffeece;
+         height: 250px;
+         bottom: 0;
+         width: 100%;
+         color: black;
+         text-align: center;
+         }
+
+         .avatar1 {
+         vertical-align: middle;
+         width: 50px;
+         height: 50px;
+         border-radius: 50%;
+         }
+         #snackbar {
+         visibility: hidden;
+         min-width: 250px;
+         margin-left: -125px;
+         background-color: #333;
+         color: #fff;
+         text-align: center;
+         border-radius: 2px;
+         padding: 16px;
+         position: fixed;
+         z-index: 1;
+         left: 50%;
+         bottom: 30px;
+         font-size: 17px;
+         margin-bottom: 500px;
+         }
+         #snackbar.show {
+         visibility: visible;
+         -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+         animation: fadein 0.5s, fadeout 0.5s 2.5s;
+         }
+         @-webkit-keyframes fadein {
+         from {bottom: 0; opacity: 0;}
+         to {bottom: 30px; opacity: 1;}
+         }
+         @keyframes fadein {
+         from {bottom: 0; opacity: 0;}
+         to {bottom: 30px; opacity: 1;}
+         }
+         @-webkit-keyframes fadeout {
+         from {bottom: 30px; opacity: 1;}
+         to {bottom: 0; opacity: 0;}
+         }
+         @keyframes fadeout {
+         from {bottom: 30px; opacity: 1;}
+         to {bottom: 0; opacity: 0;}
+         }
+         #customers {
+         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+         border-collapse: collapse;
+         width: 100%;
+         height:100%;
+         }
+         #customers td, #customers th {
+         border: 1px solid #ddd;
+         padding: 8px;
+         }
+         #customers tr:nth-child(even){background-color: #f2f2f2;}
+         #customers tr,td:hover {background-color: #ddd;}
+         #customers th {
+         padding-top: 12px;
+         padding-bottom: 12px;
+         text-align: left;
+         background-color: #4CAF50;
+         color: white;
+         }
+         #he1{
+         font-size:25px;
+         margin-left:100px;
+         }
+         #re1{
+         font-size:25px;
+         margin-left:100px;
+         margin-top:210px;
+         padding:15px 0px;
+         height:50px;
+         margin-bottom:80px;
+         }
+         #te1{
+         font-size:25px;
+         margin-left:100px;
+         margin-top:150px;
+         margin-bottom:30px;
+         padding:15px 0px;
+         }
+         .dropdown {
+         float: left;
+         overflow: hidden;
+         }
+         .dropdown .dropbtn {
+         font-size: 26px;
+         border: none;
+         outline: none;
+         color: white;
+         padding: 14px 16px;
+         background-color: inherit;
+         font-family: inherit;
+         margin: 0;
+         }
+         .dropdown-content {
+         display: none;
+         position: absolute;
+         background-color: #f9f9f9;
+         min-width: 120px;
+         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+         z-index: 1;
+         width:70px;
+         }
+         .dropdown-content a {
+         float: none;
+         color: black;
+         padding: 12px 16px;
+         text-decoration: none;
+         display: block;
+         text-align: left;
+         }
+         .dropdown-content a:hover {
+         background-color: #ddd;
+         }
+         .dropdown:hover .dropdown-content {
+         display: block;
+         }
+
+
+         /* ------------------------ Snackbar START--------------------- */
+
+         #snackbar {
+  min-width: 250px;
+  margin-left: -125px;
+  margin-top:60px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  /*visibility: visible;*/
+  -webkit-animation: fadein 0.2s, fadeout 0.1s 0.6s;
+  animation: fadein 0.2s, fadeout 0.1s 0.6s;
+}
+
+         /* -------------------------- Snackbar END -------------------------- */
+
+         #cart{
+         width: 20%;
+  padding: 10px;
+  background: black;
+  color: white;
+   margin-left:460px;
+       font-family : Roboto,Arial,sans-serif;
+       margin-top:-25px;
+         }
+      #b2{
+         margin-left:650px;
+      }
+      #b1{
+  visibility: hidden;
+      }
+
+      </style>
+   </head>
+   <body>
+      <div class="container">
+         <br><br>
+         <! ------START : Heading of website with search bar at the top------- >
+         <form class="example">
+            <input type="text" placeholder="Search" name="search2">
+            <button type="submit" id='search'><i class="fa fa-search"></i></button><br><br><br><br><br><br>
+         </form>
+         <div id="f1" >
+            <h1>Book Hunt</h1>
+         </div>
+         </div>
+          <! -------END : Heading of website and search bat at the top--------- >
+
+      <! -----------START : Nevigation Bar ----------- >
+      <ul>
+         <li><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
+         <div class="dropdown">
+            <button class="dropbtn">
+            <i class="fa fa-caret-down"><a class="active">Books</a></i>
+            </button>
+            <div class="dropdown-content">
+               <a href="#thr" id="t">Thriller</a>
+               <a href="#rom">Romance</a>
+               <a href="#fic">Fiction</a>
+            </div>
+         </div>
+         <li><a href="/authors/">Authors</a></li>
+         <li><a >Cart</a></li>
+         <li><a>About</a></li>
+      </ul>
+      <! -----------END : Nevigation Bar ----------- >
+
+      <! -----------START: Display of Fictional Books----------- >
+     <form method="post" action="/cart/">
+        {% csrf_token %}
+      <h1 name="user" id="b2"> Welcome {{ name }}</h1>
+        <input value="" name="items" id="b1">
+      <! h2 id="b1"  name="items" >
+     <input type="submit" value="Go to Cart" id="cart">
+     </form>
+      <div id="snackbar">Added to Cart</div>
+      <div id="fic">
+      <div id="he1">
+         <h1>Fiction</h1>
+      </div>
+         <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+         <! -------------START: Display of First 6 Fictional books---------------- >
+         <div class="mySlides">
+            {% for i in f1 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ i.name }}</strong></p>
+               <img src="{{ i.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ i.price }}</strong></p>
+               <br>
+               <button value="{{ i.name }}"  onclick="sold(value)" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+         </div>
+         <! -------------END: Display of First 6 Fictional books---------------- >
+         <! -------------START: Display of Next 6 Fictional books---------------- >
+         <div class="mySlides">
+            {% for i in f2 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ i.name }}</strong></p>
+               <img src="{{ i.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ i.price }}</strong></p>
+               <br>
+               <button onclick="sold(value)" value="{{ i.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+         </div>
+         <! -------------END: Display of First 6 Fictional books---------------- >
+      </div>
+      <! ----------END: Display of Fictional Books---------- >
+
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+      <! ----------START: Display of Books on Romance---------- >
+      <div id="rom">
+         <div id="re1">
+            <h1>Romance</h1>
+         </div>
+         <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+         <! -------------START : Display of first 6 books on romance--------- >
+         <div class="mySlides1">
+            {% for i in r1 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ i.name }}</strong></p>
+               <img src="{{ i.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ i.price }}</strong></p>
+               <br>
+               <button onclick="sold(value)"  value="{{ i.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs1(1)">&#10095;</button>
+         </div>
+         <! -------------END : Display of first 6 books on romance--------- >
+
+         <! -------------START : Display of Next 6 books on romance--------- >
+         <div class="mySlides1">
+            {% for i in r2 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ i.name }}</strong></p>
+               <img src="{{ i.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ i.price }}</strong></p>
+               <br>
+               <button value="{{ i.name }}" onclick="sold(value)"  style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs1(1)">&#10095;</button>
+         </div>
+      </div>
+      <! ---------------END: Display of Next 6 Books on romance ------------- >
+      <! -----------------End : Display of books on romance----------------- >
+
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+      <! ----------------START: Display of books on Thriller------------------>
+      <div id="thr">
+           <div id="te1">
+         <h1>Thriller</h1>
+      </div>
+         <button class="w3-button w3-black w3-display-left" onclick="plusDivs2(-1)">&#10094;</button>
+                     <! -------------- START: Display of first 6 books on thriller------------ >
+         <div class="mySlides2">
+            {% for i in t1 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ i.name }}</strong></p>
+               <img src="{{ i.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ i.price }}</strong></p>
+               <br>
+               <button onclick="sold(value)"  value="{{ i.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs2(1)">&#10095;</button>
+         </div>
+         <! -------------- END: Display of first 6 books on thriller------------ >
+
+         <! -------------- START: Display of next 6 books on thriller------------ >
+
+         <div class="mySlides2">
+            {% for i in t2 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ i.name }}</strong></p>
+               <img src="{{ i.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ i.price }}</strong></p>
+               <br>
+               <button onclick="sold(value)"  value="{{ i.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="w3-button w3-black w3-display-right" onclick="plusDivs2(1)">&#10095;</button>
+         </div>
+         <! -------------- END: Display of next 6 books on thriller------------ >
+      </div>
+      <! ----------------------END: Display of books on Thriller ------------------------ >
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+      <div class="footer">
+         <br>
+         <h2>Connect With Us</h2>
+         <img src="data:image/jpeg;base64,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" alt="Avatar" class="avatar1">
+         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAaVBMVEU6VZ////81Up0yT5xgc61+jbsvTZyXo8hFXaOirM0nSJmlrs7O1OUkRpkfQ5c1UZ1oerKHlcDp6/M9WKHHzeHV2ulxgravt9Td4Ozl6PGDkb7ByN5YbatQZ6j29/q3v9h2hrhMY6aQnMSsAnKHAAAC70lEQVR4nO3caXLiMBRFYdoihhhsQ5jDlPT+F9mdqv7bRrYQ7z7XOQug9BUWHiQzmRARERERERERERERERERqVe0IZQPCtaDHFwo62Yz/VrP3jtbrH0Sy7rYH46/YtpV1oPtX6jCbBel+2npThjq/Taa51AYmrdTH583YdHsP/r5nAnLTa/j05+w+ezv8yRsq/MQoB9hmPeegb6E5eU2DOhFWK4G+rwIw3CgD2G4Dge6ELaboXPQi7CJu4nwK6zvKUAHwvCVBHQgrFMmoQdh4jGqL2wviUB5YRP/uMKnsJ2mAtWF9XLkwjblcs2FsDqMXZh6LpQXhn06UFtYpZ7t5YX1wEczboTF/AlAaWFYP0OovPZU9pmGt9194W79sIq/Jt2uqqrytwbcxJ4NT9e6tR7soEIk8N749E2K7zjgubEe6dAi75yOboGxwrnTQ/RvRZTwIHy6e1SccF5Yj3N4UcJjbT3MhKKEh9J6mAlFCZWvyR4WJXxDqBxChPohRKgfQoT6IUSoH0KE+iFEqB9ChPqNQ1h0vKJcxWwt/aofvelsDFzNOlpECO9dH/DT+8ZUWMYgErNdfXuB8Ga7RPwCofHy2wuE59EfpQvbH9MXCNejF65st2q8QPhtu5Mhv/BmfE2TX/hhvGMqv3BpvBslv/BuvGUqv3A2+nloff+YX3gx3rmYX2j9CCC78Ga9NzO78GS9dTG7cDv679B8c2Z24e/R/9LsRy+8Wm/kzy60nobZhdb3TvmF9u8e5hYaP0p8gfB99PPQ/l2F3MKp+StDuYXWvuxC60eJ+YXm907ZhQJ/NlA+4d9ZOrrbH6WTzbyjmL+D/Oz6BNsl/H8V/y9E7TYpOz7BGveoceyn6QohQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLs0R8aFUYEFLSeAgAAAABJRU5ErkJggg==" alt="Avatar" class="avatar1">
+         <img src="data:image/png;base64,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" alt="Avatar" class="avatar1">
+         <br><br><br>
+         <h2>Conditions of Use & SalePrivacy NoticeInterest-Based Ads© 2019, BookHunt.com, Inc. or its affiliates</h2>
+      </div>
+      <script>
+            document.getElementById("b1").value="pppp";
+      var str="";
+      function sold(name){
+     str=str+name+",";
+      document.getElementById("b1").value=str;
+
+        var x = document.getElementById("snackbar");
+       x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+      }
+
+
+         var slideIndex = 1;
+         showDivs(slideIndex);
+
+         function plusDivs(n) {
+           showDivs(slideIndex += n);
+         }
+
+         function showDivs(n) {
+           var i;
+           var x = document.getElementsByClassName("mySlides");
+           if (n > x.length) {slideIndex = 1}
+           if (n < 1) {slideIndex = x.length}
+           for (i = 0; i < x.length; i++) {
+             x[i].style.display = "none";
+           }
+           x[slideIndex-1].style.display = "block";
+         }
+
+         var slideIndex1 = 1;
+         showDivs1(slideIndex1);
+
+         function plusDivs1(n) {
+           showDivs1(slideIndex1 += n);
+         }
+
+         function showDivs1(n) {
+           var i;
+           var x = document.getElementsByClassName("mySlides1");
+           if (n > x.length) {slideIndex1 = 1}
+           if (n < 1) {slideIndex1 = x.length}
+           for (i = 0; i < x.length; i++) {
+             x[i].style.display = "none";
+           }
+           x[slideIndex1-1].style.display = "block";
+         }
+
+
+         var slideIndex2 = 1;
+         showDivs2(slideIndex2);
+
+         function plusDivs2(n) {
+           showDivs2(slideIndex2 += n);
+         }
+
+         function showDivs2(n) {
+           var i;
+           var x = document.getElementsByClassName("mySlides2");
+           if (n > x.length) {slideIndex2 = 1}
+           if (n < 1) {slideIndex2 = x.length}
+           for (i = 0; i < x.length; i++) {
+             x[i].style.display = "none";
+           }
+           x[slideIndex2-1].style.display = "block";
+         }
+
+         function f1(){
+           document.getElementById("fic").click()
+
+         }
+
+         function f2(){
+           document.getElementById("rom").style.display = "block";
+
+         }
+
+         function f3(){
+           document.getElementById("thr").style.display = "block";
+
+         }
+
+      </script>
+   </body>
+</html>

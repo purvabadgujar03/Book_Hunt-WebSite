@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+/* ----------START: Style for body ----------------- */
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family : Roboto,Arial,sans-serif;
+}
+/* --------------END: Style for body ----------------- */
+
+
+/* ----------START: Style for Header ----------------- */
+
+.Header {
+            width:98%;
+            height:190px;
+            padding-top:20px;
+            padding-left:15px;
+            padding-right:15px;
+            background-image: linear-gradient(to bottom right,#964B00,  #eaadbd);
+            shadow: 0 0 10px .1px
+        }
+.HeaderCoponents{
+    margin:auto;
+    padding-top:20px;
+    padding-right:200px;
+    align:center;
+margin-right: 550px;
+    max-width:300px
+
+}
+form.HeaderCoponents input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  margin-top: -20px;
+  margin-bottom: 0px;
+  margin-left: 500px;
+  width: 105%;
+  background-position: -23px 0;
+
+}
+
+form.HeaderCoponents button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  height: 100%;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  margin-left: 825px;
+  margin-top: -42px;
+}
+
+form.HeaderCoponents button:hover {
+  background: #0b7dda;
+}
+
+form.HeaderCoponents ::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+#Heading {
+float: top;
+position: absolute;
+   margin-left:90px;
+   font-size: 45px;
+   margin-top: -260px;
+}
+#login{
+background-color: black;
+  border: none;
+  color: white;
+  margin-bottom:-151px;
+  padding: 12px 16px;
+  margin-left: 800px;
+  font-size: 22px;
+  cursor: pointer;
+}
+#ButtonSearch{
+    background-color: black;
+}
+/* --------------END: Style for body ----------------- */
+
+/* --------------START: Style for Navigation bar ---------------- */
+ul {
+  list-style-type: none;
+  margin-top: -65px;
+  padding-left: 300px;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: black;
+  box-shadow: 0 0 10px .1px;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #666;
+  text-align: center;
+  padding: 14px 30px;
+  text-decoration: none;
+ font-size: 25px;
+ color:white;
+}
+
+li a:hover:not(.active) {
+  background-color: #333333;
+}
+
+li a.active {
+  color: white;
+  background-color: #8F3714;
+}
+/* --------------END: Style for Navigation bar ---------------- */
+
+/* ---------------START: Style for Notice Section -------------------- */
+.NoticeCard {
+float:left;
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 20%;
+  margin-left: 10px;
+  height:600px;
+  border-radius: 10px;
+  margin-right: 20px;
+  border: solid black 1.5px;
+  background-color:#ffeece;
+}
+
+.NoticeCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.Discount {
+  padding: 2px 16px;
+  height:47%;
+}
+.NewArrivals {
+  padding: 2px 16px;
+  height:50%;
+}
+.Border{
+    border-top: 1px dashed black;
+}
+
+
+/* ---------------END: Style for Notice Section -------------------- */
+
+/* -----------------START: Style for Recommendation section ------------------ */
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+  margin-bottom: 500px;
+  margin-left: 100px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+.bookcard {
+    float:left;
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 200px;
+  height:330px;
+  margin-left:30px;
+  margin-right:10px;
+  border-radius: 2px;
+  padding:10px;
+  }
+
+.bookcard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
+.Rexcbutton{border:none;
+display:inline-block;
+padding:8px 16px;
+vertical-align:middle;
+overflow:hidden;
+text-decoration:none;
+color:inherit;
+background-color:black;
+text-align:center;
+cursor:pointer;
+color:white;
+white-space:nowrap;
+-webkit-touch-callout:none;
+-webkit-user-select:none;
+-khtml-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+user-select:none}
+
+.ButtonColor
+{color:#fff
+background-color:#000
+}
+
+.ButtonDisplay-left
+{float:left;
+position: element(.bookcard);
+margin-top:120px;
+transform: translateX(-10%);
+transform: translateY(250%);
+}
+
+.ButtonDisplay-right
+{float:right
+position: element(.bookcard);
+transform: translateX(10%);
+margin-top:180px;
+margin-left:20px;
+transform: translateY(100%);}
+
+.w3-content:
+{margin-left:50px;;
+margin-right:auto;
+max-width:980px}
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.Recommended{
+    float:left;
+    padding-left:2px;
+}
+
+/* -----------------END: Style for Recommendation section ------------------ */
+
+/* -------------------START : Style for footer -------------------- */
+
+.footer {
+  position: relative;
+  left: 0;
+  background-color:#ffeece;
+  height: 250px;
+  bottom: 0;
+  width: 100%;
+  color: black;
+  text-align: center;
+}
+
+
+.avatar1 {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* -------------------END : Style for footer -------------------- */
+
+/* -----------------------START: Compulsory code-----------------  */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+/* -----------------------END: Compulsory code-----------------  */
+
+
+</style>
+
+</head>
+<body>
+<! ------------------ Header START--------------->
+<div class="Header">
+<br><br>
+<form class="HeaderCoponents" action="">
+    <input name="SearchTextField" type="text" placeholder="Search" id="searchf" >
+  <button id='ButtonSearch'  ><i class="fa fa-search"></i></button><br><br><br><br><br><br>
+</form>
+
+    <div id="Heading" >
+<h1>Book Hunt</h1>
+</div>
+</div>
+<! -----------------Header END ----------------- >
+
+<! -------------------Navigation Bar START------------------>
+<ul>
+  <li><a class="active" href="{% url 'welcome' %}"><i class="fa fa-home"></i> Home</a></li>
+      <li><a onclick="myFunction()">Books</a></li>
+ <li><a href="/authors/">Authors</a></li>
+  <li><a href="/about/">About</a></li>
+     <li><a href="/login-registration/">Login/Register</a></li>
+
+</ul>
+<! ----------------Navigation Bar END --------------------- >
+
+<! ------------------- Notice Section START------------------- >
+<div class="NoticeCard">
+  <div class="Discount">
+    <h4><b>Discounts</b></h4>
+    <p> 50% off on second hand books!!!</p>
+	<p> Book Lovers - Best selling Books Starting At Rs.99.</p>
+  </div><hr class='Border'>
+  <div class="NewArrivals">
+    <h4><b>New Arrivals</b></h4>
+    <p>Origin- By Dan Brown</p>
+	 <p>The Girl in Room 105 - Chetan Bhagat</p>
+	  <p>The Alchemist by Paulo Coelho</p>
+  </div>
+</div>
+<! --------------------Notice Section END ---------------------- >
+
+<! ---------------------- Books Recommendation START------------------ >
+
+<h2 style="padding-left:20px">Recommended books</h2>
+<button class="Recbutton ButtonColor ButtonDisplay-left" onclick="plusDivs(-1)">&#10094;</button>
+<div class="mySlides">
+          {% for i in a1 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ i.name }}</strong></p>
+               <img src="{{ i.im1.url }}" style="margin-left:6px;">
+            </div>
+            {% endfor %}
+            <button class="Recbutton ButtonColor ButtonDisplay-right" onclick="plusDivs(1)">&#10095;</button>
+
+</div>
+<div class="mySlides">
+           {% for i in a2 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ i.name }}</strong></p>
+               <img src="{{ i.im1.url }}" style="margin-left:6px;">
+            </div>
+            {% endfor %}
+            <button class="Recbutton ButtonColor ButtonDisplay-right" onclick="plusDivs(1)">&#10095;</button>
+
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<! ---------------------- Books Recommendation END------------------ >
+
+
+
+<! ------------------------ Footer START------------------------- >
+
+<div class="footer">
+<br>
+ <h2>Connect With Us</h2>
+ <img src="media/images/fb1.png" alt="Avatar" class="avatar1">
+ <img src="media/images/gmail.png" alt="Avatar" class="avatar1">
+ <img src="media/images/int.png" alt="Avatar" class="avatar1">
+<br><br><br>
+  <h2>Conditions of Use & SalePrivacy NoticeInterest-Based Ads© 2019, BookHunt.com, Inc. or its affiliates</h2>
+</div>
+
+<! ------------------------ Footer END------------------------- >
+
+<script>
+
+function myFunction() {
+  alert("Please Login or Register");
+}
+
+/* --------------------- Script to chnage the slides START ------------------- */
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+/* --------------------- Script to chnage the slides ENDs ------------------- */
+
+
+
+
+</script>
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+

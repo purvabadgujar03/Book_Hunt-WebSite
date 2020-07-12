@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<!  ----------------------- Books.html-----------------------------------------------------------
+Discription of page: User can view books of different genres on this webpage only
+after succeful login or sign up. User can select the books and
+books will be added in the cart. After clicking on "Go to Cart"
+button user will be redirected to cart.html webpage where he
+will get his invoice.
+version:             Date:                Author:              Purpose:
+Python 3.6          11/07/2020         Purva Badgujar         To show books
+django 3.0.7                                                  available on
+Html 5                                                        website.
+Naming Convention:
+l_(variable) : Local variable
+s_(variable) : Shared variables
+------------------------------------------------------------------------------------------------- >
+<html>
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style>
+         /* ----------START: Style for body ----------------- */
+         html, body {
+         margin: 0;
+         padding: 0;
+         font-family : Roboto,Arial,sans-serif;
+         }
+         /* --------------END: Style for body ----------------- */
+
+
+         /* ----------START: Style for Header ----------------- */
+         .Header {
+         width:98%;
+         height:190px;
+         padding-top:20px;
+         padding-left:15px;
+         padding-right:15px;
+         background-image: linear-gradient(to bottom right,#964B00,  #eaadbd);
+         shadow: 0 0 10px .1px
+         }
+         .HeaderCoponents{
+         margin:auto;
+         padding-top:20px;
+         padding-right:200px;
+         align:center;
+         margin-right: 550px;
+         max-width:300px
+         }
+         form.HeaderCoponents input[type=text] {
+         padding: 10px;
+         font-size: 17px;
+         border: 1px solid grey;
+         margin-top: -20px;
+         margin-bottom: 0px;
+         margin-left: 500px;
+         width: 105%;
+         background-position: -23px 0;
+         }
+         form.HeaderCoponents button {
+         float: left;
+         width: 20%;
+         padding: 10px;
+         background: #2196F3;
+         color: white;
+         font-size: 17px;
+         height: 100%;
+         border: 1px solid grey;
+         border-left: none;
+         cursor: pointer;
+         margin-left: 825px;
+         margin-top: -42px;
+         }
+         form.HeaderCoponents button:hover {
+         background: #0b7dda;
+         }
+         form.HeaderCoponents ::after {
+         content: "";
+         clear: both;
+         display: table;
+         }
+         #Heading {
+         float: top;
+         position: absolute;
+         margin-left:90px;
+         font-size: 45px;
+         margin-top: -260px;
+         }
+         #login{
+         background-color: black;
+         border: none;
+         color: white;
+         margin-bottom:-151px;
+         padding: 12px 16px;
+         margin-left: 800px;
+         font-size: 22px;
+         cursor: pointer;
+         }
+         #ButtonSearch{
+         background-color: black;
+         }
+         /* --------------END: Style for Header----------------- */
+
+
+         /* --------------START: Style for Navigation bar ---------------- */
+         ul {
+         list-style-type: none;
+         margin-top: -65px;
+         padding-left: 300px;
+         overflow: hidden;
+         border: 1px solid #e7e7e7;
+         background-color: black;
+         box-shadow: 0 0 10px .1px;
+         }
+         li {
+         float: left;
+         }
+         li a {
+         display: block;
+         color: #666;
+         text-align: center;
+         padding: 14px 30px;
+         text-decoration: none;
+         font-size: 25px;
+         color:white;
+         }
+         li a:hover:not(.active) {
+         background-color: #333333;
+         }
+         li a.active {
+         color: white;
+         background-color: #8F3714;
+         }
+
+         /* --------------------- START : Style for Dropdown (to show genres )---------------------  */
+         .dropdown {
+         float: left;
+         overflow: hidden;
+         font-family : Roboto,Arial,sans-serif;
+         }
+         .dropdown .dropbtn {
+         font-size: 16px;
+         border: none;
+         outline: none;
+         color: white;
+         padding: 14px 16px;
+         background-color: inherit;
+         font-family : Roboto,Arial,sans-serif;
+         margin: 0;
+         }
+         .dropdown-content {
+         display: none;
+         position: absolute;
+         background-color: black;
+         color:white;
+         width: 30%;
+         left: 80;
+         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+         z-index: 1;
+         }
+         .dropdown:hover .dropdown-content {
+         display: block;
+         }
+         /* ---------------------- END: Style for Dropdowm (to show genres ) ----------------------- */
+
+         /* --------------END: Style for Navigation bar ---------------- */
+
+
+
+         /* ------------------- START : Style for "Welcome " Heading and "Go to Cart " Button -------------------- */
+         #cart{
+         width: 20%;
+         padding: 10px;
+         background: black;
+         color: white;
+         margin-left:460px;
+         font-family : Roboto,Arial,sans-serif;
+         margin-top:-25px;
+         }
+         #welcomeheading{
+         margin-left:650px;
+         }
+         #shared{
+         visibility: hidden;
+         }
+         /* ------------------- END : Style for "Welcome " Heading and "Go to Cart " Button -------------------- */
+
+
+
+
+         /* -------------------- START : Style for Slide Buttons ------------------------ */
+         .Slidebutton{border:none;
+         display:inline-block;
+         padding:8px 16px;
+         vertical-align:middle;
+         overflow:hidden;
+         text-decoration:none;
+         color:inherit;
+         background-color:black;
+         text-align:center;
+         cursor:pointer;
+         color:white;
+         white-space:nowrap;
+         -webkit-touch-callout:none;
+         -webkit-user-select:none;
+         -khtml-user-select:none;
+         -moz-user-select:none;
+         -ms-user-select:none;
+         user-select:none}
+         .ButtonColor
+         {color:#fff
+         background-color:#000
+         }
+         .ButtonDisplay-left
+         {float:left;
+         position: element(.bookcard);
+         margin-top:120px;
+         transform: translateX(-10%);
+         transform: translateY(250%);
+         }
+         .ButtonDisplay-right
+         {float:right
+         position: element(.bookcard);
+         transform: translateX(10%);
+         margin-top:180px;
+         margin-left:1px;
+         transform: translateY(100%);}
+         /* --------------------------------END: Style for Slide Buttons ----------------------- */
+
+
+         /* ----------------------------- START : Style to display Books ----------------------- */
+         .bookcard {
+         float:left;
+         box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
+         transition: 0.3s;
+         width: 200px;
+         height:450px;
+         margin-left:10px;
+         margin-right:10px;
+         border-radius: 2px;
+         padding:10px;
+         }
+         .bookcard:hover {
+         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.9);
+         }
+         /* ---------------------------- END: Style to display Books ------------------------------ */
+
+
+
+         /* ----------------------------- START : Style for "Thriller", "Fiction","Romance" Headings ---------------------- */
+         #he1{
+         font-size:25px;
+         margin-left:100px;
+         }
+         #re1{
+         font-size:25px;
+         margin-left:100px;
+         margin-top:210px;
+         padding:15px 0px;
+         height:50px;
+         margin-bottom:80px;
+         }
+         #te1{
+         font-size:25px;
+         margin-left:100px;
+         margin-top:150px;
+         margin-bottom:30px;
+         padding:15px 0px;
+         }
+         /* ----------------------------- END : Style for "Thriller", "Fiction","Romance" Headings ---------------------- */
+
+
+
+         /* ----------------------------- START : Style for footer -------------------------- */
+         .footer {
+         position: relative;
+         left: 0;
+         background-color:#ffeece;
+         height: 250px;
+         bottom: 0;
+         width: 100%;
+         color: black;
+         text-align: center;
+         }
+         /* ------------------------------ END: Style for footer ---------------------------- */
+
+
+      </style>
+   </head>
+   <body>
+      <! ------------------ Header START--------------- >
+
+      <div class="Header">
+
+         <br><br>
+         <form class="HeaderCoponents" action="">
+            <input name="SearchTextField" type="text" placeholder="Search" id="searchf" >
+            <button id='ButtonSearch'  ><i class="fa fa-search"></i></button><br><br><br><br><br><br>
+         </form>
+         <div id="Heading" >
+            <h1>Book Hunt</h1>
+         </div>
+      </div>
+
+      <! -----------------Header END ----------------- >
+
+
+      <! -----------START : Nevigation Bar ----------- >
+
+      <ul>
+         <li><a href="{% url 'home' %}"><i class="fa fa-home"></i> Home</a></li>
+         <div class="dropdown">
+            <button class="dropbtn">
+            <i class="fa fa-caret-down"><a class="active">Books</a></i>
+            </button>
+            <div class="dropdown-content">
+               <a href="#thr" id="t">Thriller</a>
+               <a href="#rom">Romance</a>
+               <a href="#fic">Fiction</a>
+            </div>
+         </div>
+         <li><a href="/authors/">Authors</a></li>
+         <li><a >Cart</a></li>
+         <li><a>About</a></li>
+      </ul>
+      <! -----------END : Nevigation Bar ----------- >
+
+
+      <! -----------START: Display of Welcome quote and Cart Button----------- >
+      <form method="post" action="/cart/">
+         {% csrf_token %}
+         <h1 id="welcomeheading" name="user" > Welcome {{ s_name }}</h1>
+         <input id="shared"   name="items" value="" >
+         <input type="submit" value="Go to Cart" id="cart">
+      </form>
+      <! -----------END: Display of Welcome quote and Cart Button----------- >
+
+
+      <! -------------------- START : Snack bar display for toast------------- >
+      <div id="snackbar">Added to Cart</div>
+      <! -------------------- END : Snack bar display for toast------------- >
+
+
+      <! -----------START: Display of Fictional Books----------- >
+      <div id="fic">
+         <div id="he1">
+            <h1>Fiction</h1>
+         </div>
+         <button class="Slidebutton ButtonColor ButtonDisplay-left" onclick="plusDivs(-1)">&#10094;</button>
+
+         <! -------------START: Display of First 6 Fictional books---------------- >
+         <div class="Slides">
+            {% for obj in s_f1 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
+               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
+               <br>
+               <button value="{{ obj.name }}"  onclick="sold(value)" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs(1)">&#10095;</button>
+         </div>
+         <! -------------END: Display of First 6 Fictional books---------------- >
+
+		 <! -------------START: Display of Next 6 Fictional books---------------- >
+         <div class="Slides">
+            {% for obj in s_f2 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
+               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
+               <br>
+               <button onclick="sold(value)" value="{{ obj.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs(1)">&#10095;</button>
+         </div>
+         <! -------------END: Display of First 6 Fictional books---------------- >
+      </div>
+      <! ----------END: Display of Fictional Books---------- >
+
+
+	  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+	  <! ----------START: Display of Books on Romance---------- >
+      <div id="rom">
+         <div id="re1">
+            <h1>Romance</h1>
+         </div>
+         <button class="Slidebutton ButtonColor ButtonDisplay-left" onclick="plusDivs(-1)">&#10094;</button>
+
+		 <! -------------START : Display of first 6 books on romance--------- >
+         <div class="Slides1">
+            {% for obj in s_r1 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
+               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
+               <br>
+               <button onclick="sold(value)"  value="{{ obj.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs1(1)">&#10095;</button>
+         </div>
+         <! -------------END : Display of first 6 books on romance--------- >
+
+		 <! -------------START : Display of Next 6 books on romance--------- >
+         <div class="Slides1">
+            {% for obj in s_r2 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
+               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
+               <br>
+               <button value="{{ obj.name }}" onclick="sold(value)"  style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs1(1)">&#10095;</button>
+         </div>
+      </div>
+      <! ---------------END: Display of Next 6 Books on romance ------------- >
+
+	  <! -----------------End : Display of books on romance----------------- >
+
+
+	  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+	  <! ----------------START: Display of books on Thriller------------------>
+      <div id="thr">
+         <div id="te1">
+            <h1>Thriller</h1>
+         </div>
+         <button class="Slidebutton ButtonColor ButtonDisplay-left" onclick="plusDivs2(-1)">&#10094;</button>
+
+		 <! -------------- START: Display of first 6 books on thriller------------ >
+         <div class="Slides2">
+            {% for obj in s_t1 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
+               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
+               <br>
+               <button onclick="sold(value)"  value="{{ obj.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs2(1)">&#10095;</button>
+         </div>
+         <! -------------- END: Display of first 6 books on thriller------------ >
+
+		 <! -------------- START: Display of next 6 books on thriller------------ >
+         <div class="Slides2">
+            {% for obj in s_t2 %}
+            <div class="bookcard">
+               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
+               <img src="{{ i.im1.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
+               <br>
+               <button onclick="sold(value)"  value="{{ obj.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
+            </div>
+            {% endfor %}
+            <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs2(1)">&#10095;</button>
+         </div>
+         <! -------------- END: Display of next 6 books on thriller------------ >
+
+	  </div>
+
+	  <! ----------------------END: Display of books on Thriller ------------------------ >
+
+
+
+	  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+	  <! ------------------------------ START: Footer ----------------------------------------- >
+	  <div class="footer">
+         <br>
+         <h2>Connect With Us</h2>
+         <img src="f1.jpg">
+         <img src="int.jpg">
+         <img src="g1.jpg">
+         <br><br><br>
+         <h2>Conditions of Use & SalePrivacy NoticeInterest-Based Ads© 2019, BookHunt.com, Inc. or its affiliates</h2>
+      </div>
+
+	  <! ------------------------------ END: Footer ----------------------------------------- >
+
+
+      <script>
+         /* ----------------------------- START: Function to share content to cart.html and toast ---------------------- */
+         var l_str="";
+         function sold(l_name){
+         l_str=l_str+l_name+",";
+         document.getElementById("shared").value=l_str;
+
+           var x = document.getElementById("snackbar");
+          x.className = "show";
+         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+         }
+         /* ----------------------------- END : Function to share content to cart.html and toast ---------------------- */
+
+
+          /* ------------------------------- START: Function to change slides while displaying books ------------------------- */
+            var slideIndex = 1;
+            showDivs(slideIndex);
+
+            function plusDivs(n) {
+              showDivs(slideIndex += n);
+            }
+
+            function showDivs(n) {
+              var i;
+              var x = document.getElementsByClassName("Slides");
+              if (n > x.length) {slideIndex = 1}
+              if (n < 1) {slideIndex = x.length}
+              for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+              }
+              x[slideIndex-1].style.display = "block";
+            }
+
+            var slideIndex1 = 1;
+            showDivs1(slideIndex1);
+
+            function plusDivs1(n) {
+              showDivs1(slideIndex1 += n);
+            }
+
+            function showDivs1(n) {
+              var i;
+              var x = document.getElementsByClassName("Slides1");
+              if (n > x.length) {slideIndex1 = 1}
+              if (n < 1) {slideIndex1 = x.length}
+              for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+              }
+              x[slideIndex1-1].style.display = "block";
+            }
+
+
+            var slideIndex2 = 1;
+            showDivs2(slideIndex2);
+
+            function plusDivs2(n) {
+              showDivs2(slideIndex2 += n);
+            }
+
+            function showDivs2(n) {
+              var i;
+              var x = document.getElementsByClassName("Slides2");
+              if (n > x.length) {slideIndex2 = 1}
+              if (n < 1) {slideIndex2 = x.length}
+              for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+              }
+              x[slideIndex2-1].style.display = "block";
+            }
+
+          /* ------------------------------- END: Function to change slides while displaying books ------------------------- */
+
+      </script>
+   </body>
+</html>

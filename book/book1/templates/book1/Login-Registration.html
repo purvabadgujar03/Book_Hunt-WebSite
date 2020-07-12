@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* ----------START: Style for body ----------------- */
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family : Roboto,Arial,sans-serif;
+}
+/* --------------END: Style for body ----------------- */
+
+
+/* ----------START: Style for Header ----------------- */
+
+.Header {
+            width:98%;
+            height:190px;
+            padding-top:20px;
+            padding-left:15px;
+            padding-right:15px;
+            background-image: linear-gradient(to bottom right,#964B00,  #eaadbd);
+            shadow: 0 0 10px .1px
+        }
+.HeaderCoponents{
+    margin:auto;
+    padding-top:20px;
+    padding-right:200px;
+    align:center;
+margin-right: 550px;
+    max-width:300px
+
+}
+
+div.HeaderCoponents input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  margin-top: -20px;
+  margin-bottom: 0px;
+  margin-left: 500px;
+  width: 105%;
+  background-position: -23px 0;
+
+}
+
+div.HeaderCoponents button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  height: 100%;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  margin-left: 825px;
+  margin-top: -42px;
+}
+
+div.HeaderCoponents button:hover {
+  background: #0b7dda;
+}
+
+div.HeaderCoponents ::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+#Heading {
+float: top;
+position: absolute;
+   margin-left:90px;
+   font-size: 45px;
+   margin-top: -260px;
+}
+#login{
+background-color: black;
+margin-top: -70px;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  margin-right: -20px;
+  font-size: 22px;
+  cursor: pointer;
+}
+#ButtonSearch{
+    background-color: black;
+}
+/* --------------END: Style for body ----------------- */
+
+/* --------------START: Style for Navigation bar ---------------- */
+ul {
+  list-style-type: none;
+  margin-top: -65px;
+  padding-left: 300px;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: black;
+  box-shadow: 0 0 10px .1px;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: #666;
+  text-align: center;
+  padding: 14px 30px;
+  text-decoration: none;
+ font-size: 25px;
+ color:white;
+}
+
+li a:hover:not(.active) {
+  background-color: #333333;
+}
+
+li a.active {
+  color: white;
+  background-color: #8F3714;
+}
+/* --------------END: Style for Navigation bar ---------------- */
+
+/* ----------------START :Style for Login-Registration Form ------------------ */
+.Formcontainer {
+  padding: 10px;
+    box-sizing: border-box;
+  background-color: white;
+  margin-left:450px;
+  border-style: solid;
+    width:600px;
+}
+#error{
+margin-left:550px;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=email]:focus , input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.registerbtn {
+  background-color: Black;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-top:-30px;
+  opacity: 0.9;
+    //display: none;
+}
+
+.loginbtn {
+  background-color: Black;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+     display: none;
+  opacity: 0.9;
+}
+#btnsignin{
+  background-color: white;
+  color: red;
+
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+a {
+  color: dodgerblue;
+
+}
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+    margin-left:450px;
+    width:600px;
+    border-style: outset;
+}
+#loginheading{
+font-size:20px;
+margin-left:210px;
+}
+#emailid , #labelemail{
+  //display: none;
+}
+/* ----------------END :Style for Login-Registration Form ------------------ */
+
+</style>
+</head>
+
+<body>
+
+<! ------------------ Header START--------------->
+<div class="Header">
+<br><br>
+
+<div class="HeaderCoponents">
+  <input name="SearchTextField" type="text" placeholder="Search" >
+  <button id='ButtonSearch' type="submit" ><i class="fa fa-search"></i></button><br><br><br><br><br><br>
+</div>
+<div id="Heading" >
+<h1>Book Hunt</h1>
+</div>
+</div>
+<! -----------------Header END ----------------- >
+
+<! -------------------Navigation Bar START------------------>
+<ul>
+    <li><a  href="{% url 'welcome' %}"><i class="fa fa-home"></i> Home</a></li>
+    <li><a onclick="myFunction()">Books</a></li>
+  <li><a href="/authors/">Authors</a></li>
+  <li><a herf=/about/">About</a></li>
+    <li><a class="active" >Login/Register</a></li>
+</ul>
+<! ----------------Navigation Bar END --------------------- >
+
+<! --------------------- Login-Registration Form START -------------------->
+
+<form  action="{% url 'login-registration' %}"  method="POST">
+{% csrf_token %}
+    <h3 id="error">{{ error }}</h3>
+  <div class="Formcontainer">
+    <h1 id="loginheading">Login/Register</h1>
+    <hr>
+    <label  ><b>{{ form.username.label }}</b></label>
+    <input pattern="(?=.*[a-z]).{3,}" type="text" placeholder="Enter Username" name="username" id="username"   required>
+
+    <label for="psw"><b>{{ form.password.label }}</b></label>
+    <input type="password" placeholder="Enter Password" name="password" id="psw"   required>
+
+    <label id="labelemail"><b>{{ form.emailid.label }}</b></label>
+    <input type="email" value=" " placeholder="Enter email address" name="email" id="emailid">
+    <hr>
+
+    <button type="submit" class="loginbtn" id="login1">Login</button>
+    <button type="submit" class="registerbtn" id="register">Register</button>
+
+  </div>
+
+  <div class="container signin" id="signup">
+    <p>Already have an account? <button onclick="login()" >Sign In</button>.</p>
+  </div>
+</form>
+
+<! ---------------------Login-Registration Form END ----------------------->
+
+<script>
+
+
+function myFunction() {
+  alert("Please Login or Register");
+}
+
+
+
+ /* ------------------Script for Registration START-------------------- */
+    function login(){
+      document.getElementById("emailid").style.display = "none";
+      document.getElementById("labelemail").style.display = "none";
+      document.getElementById("login1").style.display = "block";
+      document.getElementById("signup").style.display = "none";
+      document.getElementById("register").style.display = "none";
+      document.getElementById("username").value = ''
+      document.getElementById("psw").value = ''
+
+    }
+
+    /* ------------------Script for Registration END-------------------- */
+
+
+
+
+</script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
