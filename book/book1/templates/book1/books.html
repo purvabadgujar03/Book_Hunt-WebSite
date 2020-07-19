@@ -137,7 +137,6 @@ s_(variable) : Shared variables
          font-family : Roboto,Arial,sans-serif;
          }
          .dropdown .dropbtn {
-         font-size: 16px;
          border: none;
          outline: none;
          color: white;
@@ -145,13 +144,27 @@ s_(variable) : Shared variables
          background-color: inherit;
          font-family : Roboto,Arial,sans-serif;
          margin: 0;
+         font-size:26px;
          }
+          .dropdown-content a {
+         color:white;
+         padding: 12px 16px;
+         text-decoration: none;
+         display: block;
+         text-align: left;
+         }
+
+         .dropdown-content a:hover {background-color: #f1f1f1;}
+         .dropdown:hover .dropdown-content {
+         display: block;
+         }
+
          .dropdown-content {
          display: none;
          position: absolute;
          background-color: black;
          color:white;
-         width: 30%;
+         width: 7%;
          left: 80;
          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
          z-index: 1;
@@ -232,11 +245,21 @@ s_(variable) : Shared variables
          box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2);
          transition: 0.3s;
          width: 200px;
-         height:450px;
+         height:380px;
          margin-left:10px;
          margin-right:10px;
          border-radius: 2px;
          padding:10px;
+         }
+          .bookcard1 {
+         float:left;
+         transition: 0.3s;
+         width: 200px;
+         height:40px;
+         margin-left:-228px;
+         border-radius: 2px;
+         padding:10px;
+         margin-top:400px;
          }
          .bookcard:hover {
          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.9);
@@ -268,19 +291,58 @@ s_(variable) : Shared variables
          /* ----------------------------- END : Style for "Thriller", "Fiction","Romance" Headings ---------------------- */
 
 
+                /* ------------------------ Snackbar START--------------------- */
 
-         /* ----------------------------- START : Style for footer -------------------------- */
-         .footer {
-         position: relative;
-         left: 0;
-         background-color:#ffeece;
-         height: 250px;
-         bottom: 0;
-         width: 100%;
-         color: black;
-         text-align: center;
-         }
-         /* ------------------------------ END: Style for footer ---------------------------- */
+            #snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 630px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 0.7s;
+  animation: fadein 0.5s, fadeout 0.5s 0.7s;
+}
+
+               /* -------------------------- Snackbar END -------------------------- */
+
+
+
+
+/* -------------------START : Style for footer -------------------- */
+
+.footer {
+  position: relative;
+  left: 0;
+  background-color:#ffeece;
+  height: 250px;
+  bottom: 0;
+  width: 100%;
+  color: black;
+  text-align: center;
+}
+
+
+.avatar1 {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* -------------------END : Style for footer -------------------- */
+
 
 
       </style>
@@ -312,14 +374,14 @@ s_(variable) : Shared variables
             <i class="fa fa-caret-down"><a class="active">Books</a></i>
             </button>
             <div class="dropdown-content">
-               <a href="#thr" id="t">Thriller</a>
-               <a href="#rom">Romance</a>
+               <a href="#thr" id="t">Thriller</a><br>
+               <a href="#rom">Romance</a><br>
                <a href="#fic">Fiction</a>
             </div>
          </div>
-         <li><a href="/authors/">Authors</a></li>
-         <li><a >Cart</a></li>
+         <li><a>Authors</a></li>
          <li><a>About</a></li>
+              <li><a href="{% url 'welcome' %}">Logout</a></li>
       </ul>
       <! -----------END : Nevigation Bar ----------- >
 
@@ -347,39 +409,27 @@ s_(variable) : Shared variables
          <button class="Slidebutton ButtonColor ButtonDisplay-left" onclick="plusDivs(-1)">&#10094;</button>
 
          <! -------------START: Display of First 6 Fictional books---------------- >
-         <div class="Slides">
-            {% for obj in s_f1 %}
+            {% for x in s_f1 %}
+                  <div class="Slides">
+            {% for obj in x %}
             <div class="bookcard">
-               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
-               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
-               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
+               <p style="text-align:center"><strong>{{ obj.Book_name }}</strong></p>
+               <img src="{{ obj.Image_file.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ obj.Book_price }}</strong></p>
                <br>
-               <button value="{{ obj.name }}"  onclick="sold(value)" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
-            </div>
+                           </div>
+            <div class="bookcard1">
+            <button value="{{ obj.Book_name }}"  onclick="sold(value)" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button></div>
             {% endfor %}
             <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs(1)">&#10095;</button>
          </div>
-         <! -------------END: Display of First 6 Fictional books---------------- >
-
-		 <! -------------START: Display of Next 6 Fictional books---------------- >
-         <div class="Slides">
-            {% for obj in s_f2 %}
-            <div class="bookcard">
-               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
-               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
-               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
-               <br>
-               <button onclick="sold(value)" value="{{ obj.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
-            </div>
-            {% endfor %}
-            <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs(1)">&#10095;</button>
-         </div>
-         <! -------------END: Display of First 6 Fictional books---------------- >
+                     {% endfor %}
       </div>
+
       <! ----------END: Display of Fictional Books---------- >
 
 
-	  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	  <br><br><br><br><br><br><br><br><br><br>
 
 
 	  <! ----------START: Display of Books on Romance---------- >
@@ -387,37 +437,25 @@ s_(variable) : Shared variables
          <div id="re1">
             <h1>Romance</h1>
          </div>
-         <button class="Slidebutton ButtonColor ButtonDisplay-left" onclick="plusDivs(-1)">&#10094;</button>
+         <button class="Slidebutton ButtonColor ButtonDisplay-left" onclick="plusDivs1(-1)">&#10094;</button>
 
-		 <! -------------START : Display of first 6 books on romance--------- >
-         <div class="Slides1">
-            {% for obj in s_r1 %}
+		   {% for x in s_r1 %}
+                  <div class="Slides1">
+            {% for obj in x %}
             <div class="bookcard">
-               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
-               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
-               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
+               <p style="text-align:center"><strong>{{ obj.Book_name }}</strong></p>
+               <img src="{{ obj.Image_file.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ obj.Book_price }}</strong></p>
                <br>
-               <button onclick="sold(value)"  value="{{ obj.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
-            </div>
+                           </div>
+            <div class="bookcard1">
+            <button value="{{ obj.Book_name }}"  onclick="sold(value)" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button></div>
             {% endfor %}
             <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs1(1)">&#10095;</button>
          </div>
-         <! -------------END : Display of first 6 books on romance--------- >
-
-		 <! -------------START : Display of Next 6 books on romance--------- >
-         <div class="Slides1">
-            {% for obj in s_r2 %}
-            <div class="bookcard">
-               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
-               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
-               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
-               <br>
-               <button value="{{ obj.name }}" onclick="sold(value)"  style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
-            </div>
-            {% endfor %}
-            <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs1(1)">&#10095;</button>
-         </div>
+                     {% endfor %}
       </div>
+
       <! ---------------END: Display of Next 6 Books on romance ------------- >
 
 	  <! -----------------End : Display of books on romance----------------- >
@@ -433,38 +471,22 @@ s_(variable) : Shared variables
             <h1>Thriller</h1>
          </div>
          <button class="Slidebutton ButtonColor ButtonDisplay-left" onclick="plusDivs2(-1)">&#10094;</button>
-
-		 <! -------------- START: Display of first 6 books on thriller------------ >
-         <div class="Slides2">
-            {% for obj in s_t1 %}
+           {% for x in s_t1 %}
+                  <div class="Slides2">
+            {% for obj in x %}
             <div class="bookcard">
-               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
-               <img src="{{ obj.im1.url }}" style="margin-left:6px;">
-               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
+               <p style="text-align:center"><strong>{{ obj.Book_name }}</strong></p>
+               <img src="{{ obj.Image_file.url }}" style="margin-left:6px;">
+               <p style="text-align:center"><strong>Price : {{ obj.Book_price }}</strong></p>
                <br>
-               <button onclick="sold(value)"  value="{{ obj.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
-            </div>
+                           </div>
+            <div class="bookcard1">
+            <button value="{{ obj.Book_name }}"  onclick="sold(value)" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button></div>
             {% endfor %}
             <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs2(1)">&#10095;</button>
          </div>
-         <! -------------- END: Display of first 6 books on thriller------------ >
-
-		 <! -------------- START: Display of next 6 books on thriller------------ >
-         <div class="Slides2">
-            {% for obj in s_t2 %}
-            <div class="bookcard">
-               <p style="text-align:center"><strong>{{ obj.name }}</strong></p>
-               <img src="{{ i.im1.url }}" style="margin-left:6px;">
-               <p style="text-align:center"><strong>Price : {{ obj.price }}</strong></p>
-               <br>
-               <button onclick="sold(value)"  value="{{ obj.name }}" style="background:black; color:white; height:40px; margin-left:50px;">Add To Cart</button>
-            </div>
-            {% endfor %}
-            <button class="Slidebutton ButtonColor ButtonDisplay-right" onclick="plusDivs2(1)">&#10095;</button>
-         </div>
-         <! -------------- END: Display of next 6 books on thriller------------ >
-
-	  </div>
+                     {% endfor %}
+      </div>
 
 	  <! ----------------------END: Display of books on Thriller ------------------------ >
 
@@ -476,9 +498,13 @@ s_(variable) : Shared variables
 	  <div class="footer">
          <br>
          <h2>Connect With Us</h2>
-         <img src="f1.jpg">
-         <img src="int.jpg">
-         <img src="g1.jpg">
+
+ <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAYFBMVEU6VZ////8yUJzi5e4uTZuGk74fQ5jGzOAoSZq0u9U4U55FXaOrs9Ho6vLw8vdtfrScpslfcq3BxtzS1uXc3+tRZqe5wNj3+PtKYaV5iLgXPpWOm8MJOZR/jbtmd7Ckrs4BSRlPAAABp0lEQVR4nO3Z226DMBAEUEoWY8w9obmn/f+/rPoWXEPQdteW2plnpDmJjLN2sgxBEARBEOSvxmXOT8RyMtbVPxOp3VJd7A/TrvUz5RG+BGfcsHsLp9MHOPN+XGj/BpA2IKfhtNyvD6DzYaVeH2DHtY+vD7D9er02gMZX/boAd+7SAuz6+lMH2OF1vybA1S9eAG2ArTb0awLMln5FwKYVoAhw+ZQYcN7UrwegyzbASWseWHwH2qron6O1Bs3CLjiQpfw5Sv2ZDa/BwkSag10eHAKba5z6JUCbRTsHhAF7E6t/AXCziQEFAQAAAAAA8H8AWXQAmXmuoYnocjd+pEhUlF5CB8PJf6gsb0IC2wT6tuRTaERgA6SWBRswCs3lbIDUlMoGSM3pXEB7TwwopQZ1LqCRGtS5AKl9iA14JAacPqSO50xAVyfeBzqxwyITMIndFzABYtsAFyD1Y8wGiL2FXEAvdknGBIxid0b0OFbzhP6tKb1nGsF/jnM7jwmN5Y+r95TepVnygwkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8DvAF/q7Iz2pbiwnAAAAAElFTkSuQmCC"
+       class="avatar1">
+ <img src="data:image/jpeg;base64,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"
+      class="avatar1">
+ <img src="data:image/png;base64,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"
+      class="avatar1">
          <br><br><br>
          <h2>Conditions of Use & SalePrivacy NoticeInterest-Based Ads© 2019, BookHunt.com, Inc. or its affiliates</h2>
       </div>

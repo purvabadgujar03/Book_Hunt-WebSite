@@ -10,19 +10,18 @@ class Footer(models.Model):
     def __str__(self):
         return self.name
 
-
+c1=(("Thriller","Thriller"),("Romance","Romance"),("Fiction","Fiction"))
 class book2(models.Model):
-    name=models.CharField(max_length=150)
-    im1=models.ImageField(upload_to='images/')
-    disc=models.CharField(max_length=500)
-    price=models.IntegerField(default=0)
-    cart1=models.IntegerField(default=0)
+    Book_name=models.CharField(max_length=150)
+    Image_file=models.ImageField(upload_to='images/')
+    Book_genre=models.CharField(max_length=20,choices=c1,default='Thriller')
+    Book_price=models.IntegerField(default=0)
     def __str__(self):
-        return self.name
+        return self.Book_name
 
 class recommendation(models.Model):
     name=models.CharField(max_length=150)
-    im1 = models.ImageField(upload_to='images/')
+    im1 = models.FileField(upload_to='images/')
     disc = models.CharField(max_length=500)
     price = models.IntegerField(default=0)
     def __str__(self):

@@ -11,7 +11,9 @@ urlpatterns = [
     path('authors/', views.f4, name="authors"),
     path('login-registration/', views.f3 , name="login-registration"),
     path('about/',views.f7,name="about"),
-    path('cart/',views.f6,name="cart")
+    path('cart/',views.f6,name="cart"),
+    path('admin1/', views.f8, name="admin1"),
+    path('books/', views.admin, name="admin2")
 ]
 
 if settings.DEBUG:
